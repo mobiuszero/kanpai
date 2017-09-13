@@ -13,7 +13,17 @@ $database_submission = new ZenApp\ZenAppSubmissionActions($database);
 
 // Call form settings
 // -----------------------------------
-
+$configuration = new ZenApp\ZenAppSettings($database);
+$configuration->settings_request('read', ['name' => ['google_recaptcha', 'redirect_url', 'redirect_params']]);
+foreach ($configuration->database_callback as $config_setting_array) {
+    if ($config_setting_array['config_name'] === "google_recaptcha") {
+        $config_setting['google_recaptcha'] = json_decode($config_setting_array['config_settings']);
+    } elseif ($config_setting_array['config_name'] === "redirect_url") {
+        $config_setting['redirect_url'] = json_decode($config_setting_array['config_settings']);
+    } elseif ($config_setting_array['config_name'] === "redirect_params") {
+        $config_setting['redirect_params'] = json_decode($config_setting_array['config_settings']);
+    }
+}
 
 // Get the user's IP address
 // -----------------------------------

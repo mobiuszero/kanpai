@@ -1,0 +1,33 @@
+//************************************************************************//
+//  MODULE NAME: Sections/Footer
+//************************************************************************//
+section {
+  &.module.footer {
+    background: lighten($footer_sectionFooterBackgroundColor, 15%);
+    color: $footer_sectionFooterFontColor;
+
+    & {
+      ul.footer-site-links {
+        list-style: none;
+        text-align: center;
+        margin: 0;
+        padding: 0 1.5rem;
+        & li {
+          display: inline-block;
+          padding-left: 0;
+          padding-right: 1rem;
+          &:last-child {
+            padding-right: 0;
+          }
+        }
+      }
+      @if ($footer_section_add_countdown != false) {
+        @include countdown_clock($gray-700, #1d2124, #343a40);
+      }
+      @if ($footer_section_add_socialMedia != false) {
+        $social_media_icons_map: (twitter, #41b7d8), (linkedin, #0073b2), (github, #6e5494);
+        @include social_media_icons($social_media_icons_map, $white, 200px);
+      }
+    }
+  }
+}

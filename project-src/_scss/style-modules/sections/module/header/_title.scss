@@ -1,0 +1,61 @@
+//************************************************************************//
+//  MODULE NAME: Sections/Title
+//************************************************************************//
+section {
+  &.module.title {
+    background: $header_sectionTitleBackgroundColor;
+    color: $header_sectionTitleFontColor;
+    -webkit-box-flex: 1; /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1; /* OLD - Firefox 19- */
+    width: 100%; /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1; /* Chrome */
+    -ms-flex: 1; /* IE 10 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: $header_sectionTitleVerticalMinHeight;
+    & {
+      @if ($header_sectionTitleBackgroundImage != '') {
+        &.title--bg_image {
+          background-image: url($header_sectionTitleBackgroundImage);
+          background-size: cover;
+          background-attachment: fixed;
+          background-repeat: no-repeat;
+          background-position: center;
+          @if ($header_sectionTitleOverlayBGColor != '') {
+            &::before {
+              background: $header_sectionTitleOverlayBGColor;
+              content: '';
+              width: 100%;
+              height: 100%;
+              position: fixed;
+              left: 0;
+              top: 0;
+            }
+          }
+
+        }
+      }
+
+      $headings_for_the_title: (1, 2, 3, 4, 5, 6);
+      @each $title_heading in $headings_for_the_title {
+        h#{$title_heading} {
+          margin-bottom: 2.0rem;
+        }
+      }
+      @if ($header_sectionTitle_add_countdown != false) {
+        @include countdown_clock($gray-700, #1d2124, #343a40);
+      }
+      @if ($header_sectionTitle_add_socialMedia != false) {
+        $social_media_icons_map: (twitter, #41b7d8), (linkedin, #0073b2), (github, #6e5494);
+        @include social_media_icons($social_media_icons_map, $white, 200px);
+      }
+      a.btn, button.btn {
+        @include button_3d_style(theme-color("primary"), 100%);
+      }
+
+    }
+  }
+
+}

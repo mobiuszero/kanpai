@@ -1,0 +1,21 @@
+//************************************************************************//
+//  MODULE NAME: Base
+//************************************************************************//
+body {
+  color: $base_bodyBaseFontColor;
+  font-size: $base_bodyBaseFontSize;
+  line-height: $base_bodyBaseLineHeight;
+  font-family: $base_bodyBaseFontFamily;
+  background-color: $base_bodyBaseBackgound;
+}
+
+$headings_for_the_body: (1, 2, 3, 4, 5, 6);
+@each $body_heading in $headings_for_the_body {
+  h#{$body_heading} {
+    font-family: $base_bodyHeadingFontFamily;
+  }
+}
+
+main {
+  min-height: 100vh;
+}

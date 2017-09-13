@@ -1,0 +1,48 @@
+<!-- Email only opt-in modal -->
+<div class="zen-form modal fade" id="deploy-zen-modal-form" tabindex="-1" role="dialog"
+     aria-labelledby="signup-offer_title" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-md" role="form">
+        <div class="modal-content modal-theme--bgcolor modal-theme--text-white">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+                            class="fa fa-times-circle"></i></span></button>
+            <div class="modal-header">
+                <img src="assets/img/blue-mailbox.svg" alt="mail box blue" width="375"
+                     class="img-fluid ml-auto mr-auto"/>
+            </div>
+            <div class="modal-body">
+                <div class="zen-form__modal_content">
+                    <h4 class="text-center">Enter your email address to download your free report today!</h4>
+                    <form action="assets/inc/process.php" method="POST" accept-charset="utf-8" id="submission_form_off"
+                          novalidate="novalidate" class="zen-form">
+                        <input type="hidden" name="form_params[form_response]" value="" aria-hidden="true">
+                        <div id="email" class="form-group">
+                            <label class="form-control-label" for="email_input">Enter Your Email Address</label>
+                            <input type="email" name="form_params[email_address]" class="form-control" id="email_input"
+                                   placeholder="Example: user-123@example.com" required="required">
+                            <div class="server-callback email_address"></div>
+                        </div>
+                        <div id="g_recaptcha" class="form-group">
+                            <div class="g-recaptcha"
+                                 data-sitekey="6Ld8ry0UAAAAAPw6-AwKGXJZnBXZtNXSTKCZIoRN"
+                                 data-expired-callback="g_recaptcha_expired"></div>
+                            <div class="server-callback g_recaptcha"></div>
+                        </div>
+                        <div class="form-group">
+                            <button id="submission_form_btn" type="submit" class="btn btn-primary btn-block">Sign Up
+                                Today!
+                            </button>
+                        </div>
+                        <div class="form-group form-disclaimer">
+                            <p><i class="fa fa-lock"></i> Your information is secure and your privacy is protected. By
+                                opting in you agree to receive emails from us and our affiliates. Opt-out any time, we
+                                hate spam!</p>
+                        </div>
+                        <div id="internal_error" class="form-group">
+                            <div class="server-callback server_message internal_error"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

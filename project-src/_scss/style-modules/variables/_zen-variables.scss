@@ -1,0 +1,73 @@
+//************************************************************************//
+//  VARIABLES TABLE OF CONTENTS
+//  -----------------------------
+//  i. Base
+//  - Font
+//  1. Header
+//  2. Body
+//     - Form
+//     - Modal Form
+//  3. Footer
+//  
+//************************************************************************//
+
+// 1. Base
+// ******************************************
+$base_bodyBaseFontSize: 18px;
+$base_bodyBaseFontColor: lighten($black, 20%);
+$base_bodyBaseLineHeight: 1.5;
+$base_bodyBaseFontFamily: "Roboto", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+$base_bodyHeadingFontFamily: "Roboto Condensed", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+$base_bodyBaseBackgound: #FFFFFF;
+
+// - Font
+@import url(web-fonts-url(
+                        ("Roboto" : ("400", "500", "700")), ("Roboto Condensed" : ("500", "700", "900"))
+));
+
+// 1. Header
+// *******************************************
+$header_sectionTitleBackgroundImage: '../img/online_marketing.png';
+$header_sectionTitleVerticalMinHeight: 75vh;
+$header_sectionTitleBackgroundColor: lighten($black, 15%);
+$header_sectionTitleFontColor: $white;
+$header_sectionTitleOverlayBGColor: rgba(lighten($black, 5%), 0.60);
+$header_sectionTitle_add_countdown: false;
+$header_sectionTitle_add_socialMedia: false;
+
+// 2. Body 
+// ******************************************
+$body_section_content_add_countdown: false;
+$body_section_content_add_socialMedia: false;
+// - Section Breaks
+$body_section_break_image: '../img/128-168.jpg';
+// - Form
+$body_form_ThemeBackgroundImage: '';
+$body_form_ThemeBackgroundColor: $yellow;
+$body_form_ThemeBackgroundBtnColor: theme-color("primary");
+$body_form_ThemeBtnFontSize: 1.25rem;
+$body_form_ThemeDisclaimerFontSize: 0.85rem;
+$body_form_ThemeFontHeadingTextTransform: capitalize;
+$body_form_ThemeBtnMaxWidth: 100%;
+$body_form_ThemeBorderColor: '';
+$body_form_ThemeBorderWidth: '';
+$body_form_ThemePadding: 2.25rem;
+
+// - Modal Form
+$body_modal_form_BackgroundBtnColor: theme-color("primary");
+$body_modal_form_themeBackgroundColor: #338bcc;
+$body_modal_form_BtnFontSize: 1.25rem;
+$body_modal_form_DisclaimerFontSize: 0.85rem;
+$body_modal_form_FontHeadingTextTransform: capitalize;
+$body_modal_form_BtnMaxWidth: 100%;
+$body_modal_form_BorderColor: '';
+$body_modal_form_BorderWidth: '';
+$body_modal_form_Padding: 2.25rem;
+
+// 3. Footer
+// ******************************************
+$footer_section_add_countdown: false;
+$footer_section_add_socialMedia: false;
+$footer_sectionFooterBackgroundImage: '';
+$footer_sectionFooterBackgroundColor: $black;
+$footer_sectionFooterFontColor: $white;

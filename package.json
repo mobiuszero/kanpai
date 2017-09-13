@@ -1,0 +1,46 @@
+{
+  "name": "zen-optin",
+  "version": "0.1.0",
+  "description": "zen optin (static) by mobiuszero: A webform that is being created in ajax and bootstrap 4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mobiuszero <mobiuszero@mobiuszero.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "assemble": "^0.24.3",
+    "bootstrap": "^4.0.0-beta",
+    "font-awesome": "^4.7.0",
+    "grunt": "^1.0.1",
+    "grunt-assemble": "^0.6.3",
+    "grunt-bump": "^0.8.0",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-compress": "^1.4.3",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-htmlmin": "^2.4.0",
+    "grunt-contrib-imagemin": "^2.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-critical": "^0.3.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-template": "^1.0.0",
+    "grunt-tinypng": "^0.7.0",
+    "grunt-zip": "^0.17.1",
+    "jquery-form-validator": "^2.3.74",
+    "jquery-validation": "^1.17.0",
+    "load-grunt-config": "^0.19.2",
+    "sass-font-awesome": "^1.0.2",
+    "sass-mq": "^3.3.2",
+    "sass-rem": "^1.2.4",
+    "sass-web-fonts": "^2.0.2",
+    "template": "^0.17.5",
+    "time-grunt": "^1.4.0"
+  },
+  "dependencies": {
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-tinyimg": "^1.0.0",
+    "jquery-countdown": "^2.2.0"
+  }
+}

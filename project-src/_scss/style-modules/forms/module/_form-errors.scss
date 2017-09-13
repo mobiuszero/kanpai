@@ -1,0 +1,23 @@
+//************************************************************************//
+//  MODULE NAME: Form Errors 
+//************************************************************************//
+form.zen-form {
+  & .form-control-feedback {
+    width: 100%;
+    height: 100%;
+    position: inherit;
+    text-align: left;
+    &.alert {
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+  }
+  & .has-danger {
+    color: $form-feedback-invalid-color;
+    & {
+      input, textarea {
+        border: 1px solid $form-feedback-invalid-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+//************************************************************************//
+//  MODULE NAME: Lists/Font Awesome Lists
+//************************************************************************//
+@mixin fa_list($fa-font,$fa-font-color: inherit) {
+  & li {
+    list-style: none;
+  }
+
+  & > li:before {
+    position: absolute;
+    left: 1.75rem;
+    font-family: 'FontAwesome', sans-serif;
+    content: $fa-font;
+    color: $fa-font-color
+  }
+}

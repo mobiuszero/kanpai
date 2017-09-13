@@ -1,0 +1,27 @@
+default:
+  description: 'Project default will be a development build'
+  tasks:
+    -  development
+
+development:
+  description: 'Development build (development package)'
+  tasks:
+    - 'clean'
+    - 'assemble'
+    - 'sass:development'
+    - 'concat:development'
+    - 'concurrent:copy_files'
+    - 'concurrent:optimize_images'
+    - 'watch:development'
+
+production:
+  description: 'Production build (Production ready pre-package)'
+  tasks:
+    - 'clean'
+    - 'assemble'
+    - 'sass:production'
+    - 'concat:production'
+    - 'uglify:production'
+    - 'concurrent:copy_files'
+    - 'concurrent:optimize_images'
+    - 'watch:production'

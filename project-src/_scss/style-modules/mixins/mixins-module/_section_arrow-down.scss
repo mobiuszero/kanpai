@@ -1,0 +1,24 @@
+//************************************************************************//
+//  MODULE NAME: Sections/Mixins/Arrow_down
+//************************************************************************//
+@mixin arrow_down($section-background-color,$section-margin) {
+  & {
+    border-color: $section-background-color;
+    margin: $section-margin;
+  }
+  &:before {
+    border-top-color: inherit !important;
+    border-width: 30px 80px 0 !important;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -7%;
+    left: 50%;
+    z-index: 1;
+    border: solid transparent;
+    border-color: transparent;
+  }
+}

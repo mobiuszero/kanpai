@@ -1,0 +1,7 @@
+# ignore package files
+node_modules/
+project-build/
+.git/*
+.idea
+/project-src/_php_scripts/vendor/
+/sh.exe.stackdump

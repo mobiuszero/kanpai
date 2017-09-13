@@ -1,0 +1,22 @@
+{
+  "name": "rupu-alpha-001/zen-optins",
+  "description": "Required files for zen opt-in app",
+  "require": {
+    "guzzlehttp/guzzle": "^6.3",
+    "rych/random": "^0.1.0",
+    "google/recaptcha": "~1.1"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "mobiuszero",
+      "email": "mobiuszero@mobiuszero.com"
+    }
+  ],
+  "minimum-stability": "alpha",
+  "autoload": {
+    "psr-4": {
+      "ZenApp\\": "zen_client_app/"
+    }
+  }
+}

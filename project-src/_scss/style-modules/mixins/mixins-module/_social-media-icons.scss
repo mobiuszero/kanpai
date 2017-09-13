@@ -1,0 +1,30 @@
+//************************************************************************//
+//  MODULE NAME: Social Media
+//************************************************************************//
+@mixin social_media_icons($social_media_icons_map,$social_media_icons_label_color,$social_media_icons_box_width) {
+  ul.social-media-icons {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    & li {
+      display: inline-block;
+      margin: 0 0.15rem;
+      @each $social_media_icon, $social_media_icon_color in $social_media_icons_map {
+        &.icon--#{$social_media_icon} {
+          background: $social_media_icon_color;
+          & {
+            a {
+              display: inline-block;
+              text-decoration: none;
+              min-width: $social_media_icons_box_width;
+              padding: 0.75rem;
+              background: $social_media_icon_color;
+              color: $social_media_icons_label_color;
+            }
+          }
+        }
+      }
+    }
+  }
+}

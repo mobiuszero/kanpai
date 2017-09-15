@@ -2,7 +2,7 @@ module.exports = {
     php_scripts_files: {
         expand: true,
         cwd: 'project-src/_php_scripts/',
-        src: ['**/*', '!tests/', '!test-zen_app.php', '!phpunit-6.2.4.phar'],
+        src: ['**/*', '!commands', '!commands/*', '!phpunit-6.2.4.phar', '!composer.json'],
         dest: 'project-build/assets/inc/'
     },
     images: {

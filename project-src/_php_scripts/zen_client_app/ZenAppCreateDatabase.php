@@ -6,13 +6,28 @@
 namespace ZenApp;
 
 
-class ZenAppDatabaseActions
+class ZenAppCreateDatabase
 {
     /**
      * For the constructor
      * @var object $pdo
      */
     private $pdo;
+
+    /**
+     * Initialize the object with a specified PDO object
+     */
+    public function __construct()
+    {
+        try {
+            if (empty($this->pdo)) {
+                $this->pdo = new \PDO("sqlite:" . ZenAppConnectionConfig::PATH_TO_DATABASE);
+                $this->set_database_tables();
+            }
+        } catch (\PDOException $error) {
+            exit("Exception: " . $error->getMessage());
+        }
+    }
 
     /**
      * Used for the database actions
@@ -31,19 +46,10 @@ class ZenAppDatabaseActions
     private $user_admin_interface;
 
     /**
-     * Initialize the object with a specified PDO object
-     * @param \PDO $pdo
-     */
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
-    /**
      * Used to create database tables
      * @return bool
      */
-    public function set_database_tables()
+    private function set_database_tables()
     {
         $return = false;
         $required_tables = ['configuration', 'formPageViews', 'formSubmissionData', 'emailVerification', 'user_api_interface'];
@@ -61,7 +67,7 @@ class ZenAppDatabaseActions
      * Runs the query to check the tables in database
      * @param $table_name
      * @return mixed
-     * @throws \Exception
+     * @throws \Exception++
      */
     private function database_table_check($table_name)
     {

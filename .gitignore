@@ -5,3 +5,4 @@ project-build/
 .idea
 /project-src/_php_scripts/vendor/
 /sh.exe.stackdump
+/package-lock.json

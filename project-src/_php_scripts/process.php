@@ -2,32 +2,9 @@
 error_reporting(E_ALL & ~E_NOTICE);
 // Load assets
 // -----------------------------------
-require 'vendor/autoload.php';
-require 'functions/commons.php';
-require 'functions/vendor.php';
-
-// Call the submission class
-// -----------------------------------
-$database = (new ZenApp\ZenAppConnection)->connect();
-$database_submission = new ZenApp\ZenAppSubmissionActions($database);
-
-// Call form settings
-// -----------------------------------
-$configuration = new ZenApp\ZenAppSettings($database);
-$configuration->settings_request('read', ['name' => ['google_recaptcha', 'redirect_url', 'redirect_params']]);
-foreach ($configuration->database_callback as $config_setting_array) {
-    if ($config_setting_array['config_name'] === "google_recaptcha") {
-        $config_setting['google_recaptcha'] = json_decode($config_setting_array['config_settings']);
-    } elseif ($config_setting_array['config_name'] === "redirect_url") {
-        $config_setting['redirect_url'] = json_decode($config_setting_array['config_settings']);
-    } elseif ($config_setting_array['config_name'] === "redirect_params") {
-        $config_setting['redirect_params'] = json_decode($config_setting_array['config_settings']);
-    }
-}
-
-// Get the user's IP address
-// -----------------------------------
-$ip_address = get_ip_address();
+require_once 'vendor/autoload.php';
+require_once 'functions/commons.php';
+require_once 'functions/vendor.php';
 
 // Variables
 // -----------------------------------
@@ -35,8 +12,34 @@ $error_message = [];
 $status_message = [];
 $filtered_inputs = [];
 $redirect_params = [];
+$configuration = [];
 $filter_out_inputs = ['form_response'];
-$database_data = null;
+
+// Make call to the database
+// -----------------------------------
+$database_connection = (new ZenApp\ZenAppConnection())->connect();
+
+// Call settings
+// -----------------------------------
+$retrieve_settings = new ZenApp\ZenAppSettings($database_connection);
+$retrieve_settings->settings_request('read', ['name' => ['google_recaptcha', 'redirect_url', 'redirect_params']]);
+foreach ($retrieve_settings->database_callback as $settings) {
+    if ($settings['config_name'] === "google_recaptcha") {
+        $configuration['google_recaptcha'] = json_decode($settings['config_settings']);
+    } elseif ($settings['config_name'] === "redirect_url") {
+        $configuration['redirect_url'] = json_decode($settings['config_settings']);
+    } elseif ($settings['config_name'] === "redirect_params") {
+        $configuration['redirect_params'] = json_decode($settings['config_settings']);
+    }
+}
+
+// Call submission actions
+// -----------------------------------
+$form_submission_actions = new ZenApp\ZenAppSubmissionActions($database_connection);
+
+// Get the user's IP address
+// -----------------------------------
+$user_ip_address = get_ip_address();
 
 // Process the form post inputs
 // -----------------------------------
@@ -70,47 +73,27 @@ foreach ($form_params as $form_params_keys => $form_params_values) {
 
 //  Frontend validation - second wave
 // -----------------------------------
-if (empty($config_setting_array['google_recaptcha'])) {
-    $error_message = parse_error(["g_recaptcha" => "Internal configuration error. Please contact support."]);
-}
-
 if (empty($google_recaptcha)) {
     $error_message = parse_error(["g_recaptcha" => "Please complete the recaptcha."]);
 }
 
-if (empty($config_setting['google_recaptcha'])) {
-    $error_message = parse_error(["g_recaptcha" => "Recaptcha key is not set."]);
-}
-
-if (empty($config_setting['redirect_url'])) {
-    $error_message = parse_error(["internal_error" => "Redirect is not a valid url."]);
-}
-
 if (empty($ip_address)) {
-    $error_message = parse_error(["internal_error" => "Internal form error. Please contact support."]);
+    $error_message = parse_error(["internal_error" => "Please contact support. Validation error - IP"]);
 }
 
 if (empty($filtered_inputs['form_response']) === false) {
-    $error_message = parse_error(["internal_error" => "Internal form error. Please contact support."]);
+    $error_message = parse_error(["internal_error" => "Please contact support. Validation error - Form"]);
 }
 
 if (empty($filtered_inputs['email_address'])) {
     $error_message = parse_error(["email_address" => "Email address is invalid."]);
 }
 
-if (empty($filtered_inputs['first_name']) && $filtered_inputs['required_params'] === 'first_name') {
-    $error_message = parse_error(["first_name" => "This field is required."]);
-}
-
-if (empty($filtered_inputs['phone']) && $filtered_inputs['required_params'] === 'phone') {
-    $error_message = parse_error(["phone" => "This field is required."]);
-}
-
 //  Vendor validation - third wave
 // -----------------------------------
 if (!empty($config_setting_array['google_recaptcha'])) {
     $google_recaptcha_status = google_recaptcha_verification(
-        $config_setting['google_recaptcha']->secret_key,
+        $configuration['google_recaptcha']->secret_key,
         $google_recaptcha,
         $ip_address
     );
@@ -119,10 +102,11 @@ if (!empty($config_setting_array['google_recaptcha'])) {
     }
 }
 
-// Parse redirect Params
+
+// If the redirect parameters were set in the settings than parse them
 // -----------------------------------
-if (!empty($config_setting['redirect_params'])) {
-    foreach ($config_setting['redirect_params']->params as $field_name) {
+if (!empty($settings['redirect_params'])) {
+    foreach ($settings['redirect_params']->params as $field_name) {
         if ($filtered_inputs[$field_name] === $field_name) {
             $redirect_params = $filtered_inputs[$field_name];
         }
@@ -131,13 +115,14 @@ if (!empty($config_setting['redirect_params'])) {
 
 // Make a call to server side script if data is valid else show error
 // -----------------------------------
+$database_data = parse_all_data_into_json($filtered_inputs, $filter_out_inputs);
+$form_submission_actions->record_form_data($user_ip_address, $database_data);
+
 if (empty($error_message)) {
     $status_message = parse_success_redirect(
         ["success" => "ready"],
-        $config_setting['redirect_url']->url, $redirect_params
+        $configuration['redirect_url']->url, $redirect_params
     );
-    $database_data = parse_all_data_into_json($filtered_inputs, $filter_out_inputs);
-    $database_submission->record_form_data($ip_address, $database_data);
 } else {
     $status_message = $error_message;
 }

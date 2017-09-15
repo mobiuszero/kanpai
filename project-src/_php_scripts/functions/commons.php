@@ -83,13 +83,13 @@ function parse_success_form_data($success_response_array)
 function parse_success_redirect($success_response_array, $redirect, $redirect_params = null)
 {
     $parsed_redirect = [];
-    if (!empty($redirect_params = urldecode(http_build_query($redirect_params)))) {
+    if (!empty($redirect_params)) {
         foreach ($success_response_array as $success_response_array_key => $success_response_array_value) {
             $parsed_redirect = [
                 "status" => true,
                 "field" => $success_response_array_key,
                 "message" => $success_response_array_value,
-                "params" => $redirect_params,
+                "params" => urldecode(http_build_query($redirect_params)),
                 "redirect" => $redirect
             ];
         }

@@ -14,6 +14,7 @@
     }
   ],
   "minimum-stability": "alpha",
+  "optimize-autoloader": true,
   "autoload": {
     "psr-4": {
       "ZenApp\\": "zen_client_app/"

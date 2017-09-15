@@ -171,6 +171,7 @@ class ZenAppSettings
     }
 
     /**
+     *
      * @param $config_name
      * @param $config_settings
      * @throws \Exception

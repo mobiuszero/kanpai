@@ -4,7 +4,7 @@ module.exports = {
         layout: "*.hbs",
         flatten: true,
         partials: 'project-src/_build_files/components/**/*.hbs',
-        ext: '.php'
+        ext: '.html'
     },
     pages: {
         options: {

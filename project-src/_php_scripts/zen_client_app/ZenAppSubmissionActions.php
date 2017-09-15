@@ -52,7 +52,7 @@ class ZenAppSubmissionActions
     public function record_form_data($ip_address, $form_submission_data)
     {
         try {
-            // Data retrival
+            // Data retrieval
             $this->check_for_ip_address_key($ip_address);
             $this->json_submission_data($form_submission_data);
             $this->get_submission_data_return_id_key_counter($ip_address);
@@ -152,7 +152,6 @@ class ZenAppSubmissionActions
             $random->setEncoder($hex_bytes);
             $this->random_submission_key = $random->getRandomBytes($number_of_random_chars);
             $this->random_submission_id = implode('-', str_split($random->getRandomBytes($number_of_random_chars), 5));
-
 
         } else {
             throw new \Exception('Character count is less than 5');

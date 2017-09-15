@@ -12,7 +12,7 @@ class ZenAppConnection
     public function connect()
     {
         try {
-            if ($this->pdo === null) {
+            if (empty($this->pdo)) {
                 $this->pdo = new \PDO("sqlite:" . ZenAppConnectionConfig::PATH_TO_DATABASE);
             }
         } catch (\PDOException $error) {

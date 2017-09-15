@@ -1,5 +1,5 @@
 module.exports = {
-    all: [
+    project_build: [
         'project-build/**/*'
     ]
 };

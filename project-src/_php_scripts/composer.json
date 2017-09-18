@@ -1,6 +1,6 @@
 {
-  "name": "rupu-alpha-001/zen-optins",
-  "description": "Required files for zen opt-in app",
+  "name": "ZenApp/Kanpai",
+  "description": "This is a landing page made in bootstrap 4 with an API.",
   "require": {
     "guzzlehttp/guzzle": "^6.3",
     "rych/random": "^0.1.0",
@@ -13,7 +13,7 @@
       "email": "mobiuszero@mobiuszero.com"
     }
   ],
-  "minimum-stability": "alpha",
+  "minimum-stability": "stable",
   "optimize-autoloader": true,
   "autoload": {
     "psr-4": {

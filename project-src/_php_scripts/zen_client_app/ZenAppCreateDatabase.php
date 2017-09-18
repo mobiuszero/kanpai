@@ -5,7 +5,6 @@
 
 namespace ZenApp;
 
-
 class ZenAppCreateDatabase
 {
     /**
@@ -22,7 +21,6 @@ class ZenAppCreateDatabase
         try {
             if (empty($this->pdo)) {
                 $this->pdo = new \PDO("sqlite:" . ZenAppConnectionConfig::PATH_TO_DATABASE);
-                $this->set_database_tables();
             }
         } catch (\PDOException $error) {
             exit("Exception: " . $error->getMessage());
@@ -49,7 +47,7 @@ class ZenAppCreateDatabase
      * Used to create database tables
      * @return bool
      */
-    private function set_database_tables()
+    public function set_database_tables()
     {
         $return = false;
         $required_tables = ['configuration', 'formPageViews', 'formSubmissionData', 'emailVerification', 'user_api_interface'];
@@ -67,9 +65,9 @@ class ZenAppCreateDatabase
      * Runs the query to check the tables in database
      * @param $table_name
      * @return mixed
-     * @throws \Exception++
+     * @throws \Exception
      */
-    private function database_table_check($table_name)
+    public function database_table_check($table_name)
     {
         if (!empty($table_name)) {
             $sql = "SELECT name FROM sqlite_master WHERE name = :table_name";
